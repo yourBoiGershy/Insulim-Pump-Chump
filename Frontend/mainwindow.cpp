@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect to bolus buttons
     connect(bolusPage, &bolus::logoBtnPressed, this, &MainWindow::switchToHome);
+    connect(bolusPage, &bolus::insulinAdministered, homePage, &home::receiveInsulin);
 
     // connect to options buttons
     connect(optionsPage, &options::logoBtnPressed, this, &MainWindow::switchToHome);

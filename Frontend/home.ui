@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>636</width>
-    <height>586</height>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QLabel" name="insulinUnit">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>615</x>
      <y>420</y>
-     <width>81</width>
+     <width>20</width>
      <height>31</height>
     </rect>
    </property>
@@ -72,7 +72,7 @@
   <widget class="QLabel" name="insulinLabel">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>440</x>
      <y>420</y>
      <width>181</width>
      <height>17</height>
@@ -95,7 +95,7 @@
   <widget class="QLCDNumber" name="InsulinOnBoard">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>550</x>
      <y>420</y>
      <width>64</width>
      <height>23</height>
@@ -119,9 +119,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>450</y>
+     <y>520</y>
      <width>291</width>
-     <height>121</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="text">
@@ -132,9 +132,9 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>450</y>
+     <y>520</y>
      <width>311</width>
-     <height>121</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="text">
@@ -154,7 +154,7 @@
     <string>Battery</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="GraphWidget">
+  <widget class="QWidget" name="GraphWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -162,6 +162,120 @@
      <width>421</width>
      <height>301</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="LogGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>410</y>
+     <width>421</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>CGM Readings Log (5-minute intervals)</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QListWidget" name="DataListWidget"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="PauseResumeBtn">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>200</y>
+     <width>83</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SimSpeedBtn">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>240</y>
+     <width>121</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Simulation Speed</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="TimeRangeBtn">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>310</y>
+     <width>121</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Time Range: 2h</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ClearDataBtn">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>350</y>
+     <width>121</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear Data</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="SimTimeLabel">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>380</y>
+     <width>121</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sim Time: 00:00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="SimStatusLabel">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>270</y>
+     <width>121</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Status: Running</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LogTitleLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>580</y>
+     <width>421</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>* Log shows glucose readings at 5-minute intervals (1 real second = 5 simulated minutes)</string>
    </property>
   </widget>
   <widget class="QLCDNumber" name="GlucoseLevel">

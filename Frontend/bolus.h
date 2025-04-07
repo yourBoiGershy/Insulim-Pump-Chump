@@ -2,6 +2,7 @@
 #define BOLUS_H
 
 #include <QWidget>
+#include <QMessageBox>
 
 namespace Ui {
 class bolus;
@@ -20,6 +21,7 @@ private:
 
 signals:
     void logoBtnPressed();
+    void insulinAdministered(double units);
 
 private slots:
     void handleCalculationBtn();
