@@ -10,28 +10,32 @@ CONFIG += c++11
 
 SOURCES += \
     bolus.cpp \
-    createprofile.cpp \
     home.cpp \
     main.cpp \
     mainwindow.cpp \
     options.cpp \
+    profile.cpp \
+    profileeditor.cpp \
+    profilemanager.cpp \
     profilepage.cpp
 
 HEADERS += \
     bolus.h \
-    createprofile.h \
     def.h \
     home.h \
     mainwindow.h \
     options.h \
+    profile.h \
+    profileeditor.h \
+    profilemanager.h \
     profilepage.h
 
 FORMS += \
     bolus.ui \
-    createprofile.ui \
     home.ui \
     mainwindow.ui \
     options.ui \
+    profileeditor.ui \
     profilepage.ui
 
 # Default rules for deployment.

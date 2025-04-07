@@ -6,7 +6,8 @@
 #include <bolus.h>
 #include <options.h>
 #include <profilepage.h>
-#include <createprofile.h>
+#include <profileeditor.h>
+#include "profilemanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,7 +32,9 @@ private:
 
     profilepage *profilePage;
 
-    createprofile *createPage;
+    ProfileEditor *profileEditor;
+
+    ProfileManager profileManager;
 
 signals:
     void powerBtnPressed();
@@ -41,7 +44,8 @@ private slots:
     void switchToOptions();
     void switchToHome();
     void switchToProfiles();
-    void switchToCreatePage();
+    void switchToProfileEditor();
+    void switchToEditProfile(const QString &profileName);
     void handlePowerBtn();
 
 };

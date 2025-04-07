@@ -5,7 +5,7 @@
 #include "bolus.h"
 #include "options.h"
 #include "profilepage.h"
-#include "createprofile.h"
+#include "profileeditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,7 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     profilePage = new profilepage(this);
 
-    createPage = new createprofile(this);
+    profileEditor = new ProfileEditor(this);
+    profileEditor->setProfileManager(&profileManager);
 
 
     // add ui files to stackedwidget
@@ -30,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(bolusPage);
     ui->stackedWidget->addWidget(optionsPage);
     ui->stackedWidget->addWidget(profilePage);
-    ui->stackedWidget->addWidget(createPage);
+    ui->stackedWidget->addWidget(profileEditor);
 
     // default to homepage
     ui->stackedWidget->setCurrentWidget(homePage);
@@ -52,11 +53,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(optionsPage, &options::sleepBtnPressed, this, &MainWindow::switchToProfiles);
 
     connect(profilePage, &profilepage::backBtnPressed, this, &MainWindow::switchToOptions);
-    connect(profilePage, &profilepage::createBtnPressed, this, &MainWindow::switchToCreatePage);
+    connect(profilePage, &profilepage::createBtnPressed, this, &MainWindow::switchToProfileEditor);
+    connect(profilePage, &profilepage::editProfileRequested, this, &MainWindow::switchToEditProfile);
 
     connect(this, &MainWindow::powerBtnPressed, homePage, &home::handlePowerBtn);
 
-    connect(createPage, &createprofile::backBtnPressed, this, &MainWindow::switchToProfiles);
+    connect(profileEditor, &ProfileEditor::backBtnPressed, this, &MainWindow::switchToProfiles);
+    connect(profileEditor, &ProfileEditor::profileSaved, this, &MainWindow::switchToProfiles);
 
 }
 
@@ -78,12 +81,20 @@ void MainWindow::switchToHome(){
 }
 
 void MainWindow::switchToProfiles(){
+    // Set the current widget to the profile page
     ui->stackedWidget->setCurrentWidget(profilePage);
+
+    // The showEvent in profilePage will automatically refresh the profiles list
 }
 
-void MainWindow::switchToCreatePage(){
-    ui->stackedWidget->setCurrentWidget(createPage);
+void MainWindow::switchToProfileEditor(){
+    profileEditor->createNewProfile();
+    ui->stackedWidget->setCurrentWidget(profileEditor);
+}
 
+void MainWindow::switchToEditProfile(const QString &profileName){
+    profileEditor->editProfile(profileName);
+    ui->stackedWidget->setCurrentWidget(profileEditor);
 }
 
 void MainWindow::handlePowerBtn(){

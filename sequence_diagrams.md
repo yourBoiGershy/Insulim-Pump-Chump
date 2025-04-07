@@ -1,6 +1,21 @@
 # Sequence Diagrams for Insulin Pump Simulator
 
-This document contains sequence diagrams for the key scenarios in the Insulin Pump Simulator application.
+This document contains sequence diagrams for the key scenarios in the Insulin Pump Simulator application. These diagrams illustrate the interactions between different components of the system and provide a clear visualization of the application's behavior.
+
+## Key Requirements Addressed
+
+1. **Manual Bolus Delivery**: Both with manually entered glucose levels and auto-populated from CGM.
+
+2. **Personal Profiles Management**:
+   - Creating and storing multiple profiles with different settings
+   - Switching between profiles (at least 3 different profiles as per requirements)
+   - Each profile contains settings for insulin-to-carb ratios, correction factors, and target glucose levels
+
+3. **Control-IQ Technology**: Automatic adjustment of insulin delivery based on CGM readings and predictions.
+
+4. **Safety Features**: Including low glucose suspension and resumption.
+
+5. **Extended Bolus**: Delivering bolus insulin over time with specified percentages.
 
 ## 1. Manual Bolus with Manually Entered Glucose Level
 
@@ -106,77 +121,152 @@ User                    BolusScreen              HomeScreen              CGM    
   |                         |                        |                      |                      |
 ```
 
-## 3. Setting Up a Personal Profile
+## 3. Setting Up and Managing Personal Profiles
 
 ```
-User                    ProfileScreen           ProfileManager          InsulinPump
-  |                         |                        |                      |
-  |  Click Options Button   |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Click Profiles         |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Click Create Profile   |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Enter Profile Name     |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Set Insulin-to-Carb    |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Set Correction Factor  |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Set Target BG          |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Set Basal Rate         |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Add Time Segment       |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Set Segment Settings   |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |  Save Profile           |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |                         | Validate Profile       |                      |
-  |                         | --------------------- |                       |
-  |                         |                        |                      |
-  |                         | Save Profile           |                      |
-  |                         | ----------------------> |                      |
-  |                         |                        |                      |
-  |                         |                        | Store Profile        |
-  |                         |                        | ------------------- | |
-  |                         |                        |                      |
-  |                         |                        | Confirm Saved        |
-  |                         | <---------------------- |                      |
-  |                         |                        |                      |
-  |                         | Show Confirmation      |                      |
-  | <---------------------- |                        |                      |
-  |                         |                        |                      |
-  |  Activate Profile       |                        |                      |
-  | ----------------------> |                        |                      |
-  |                         |                        |                      |
-  |                         | Set Active Profile     |                      |
-  |                         | ----------------------> |                      |
-  |                         |                        |                      |
-  |                         |                        | Apply Profile        |
-  |                         |                        | ----------------------> |
-  |                         |                        |                      |
-  |                         |                        | Confirm Applied      |
-  |                         | <---------------------- |                      |
-  |                         |                        |                      |
-  |                         | Show Success           |                      |
-  | <---------------------- |                        |                      |
-  |                         |                        |                      |
+User                    ProfileScreen           ProfileManager          InsulinPump          Database
+  |                         |                        |                      |                     |
+  |  Click Options Button   |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Click Profiles         |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Request Stored Profiles|                      |                     |
+  |                         | ----------------------> |                      |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Retrieve Profiles    |                     |
+  |                         |                        | -----------------------------------------> |
+  |                         |                        |                      |                     |
+  |                         |                        |                      | Return Profiles     |
+  |                         |                        | <----------------------------------------- |
+  |                         |                        |                      |                     |
+  |                         | Display Profile List   |                      |                     |
+  | <---------------------- |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Click Create Profile   |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Enter Profile Name     |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Set Insulin-to-Carb    |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Set Correction Factor  |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Set Target BG          |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Set Basal Rate         |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Add Time Segment       |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Set Segment Settings   |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Save Profile           |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Validate Profile       |                      |                     |
+  |                         | --------------------- |                       |                     |
+  |                         |                        |                      |                     |
+  |                         | Save Profile           |                      |                     |
+  |                         | ----------------------> |                      |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Store Profile        |                     |
+  |                         |                        | -----------------------------------------> |
+  |                         |                        |                      |                     |
+  |                         |                        |                      | Confirm Stored      |
+  |                         |                        | <----------------------------------------- |
+  |                         |                        |                      |                     |
+  |                         |                        | Confirm Saved        |                     |
+  |                         | <---------------------- |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Show Confirmation      |                      |                     |
+  | <---------------------- |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Activate Profile       |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Set Active Profile     |                      |                     |
+  |                         | ----------------------> |                      |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Apply Profile        |                     |
+  |                         |                        | ----------------------> |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Update Active Profile|                     |
+  |                         |                        | -----------------------------------------> |
+  |                         |                        |                      |                     |
+  |                         |                        | Confirm Applied      |                     |
+  |                         | <---------------------- |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Show Success           |                      |                     |
+  | <---------------------- |                        |                      |                     |
+  |                         |                        |                      |                     |
 ```
 
-## 4. Control-IQ Technology Scenario
+## 4. Switching Between Multiple Profiles
+
+```
+User                    ProfileScreen           ProfileManager          InsulinPump          Database
+  |                         |                        |                      |                     |
+  |  Click Options Button   |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Click Profiles         |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Request Stored Profiles|                      |                     |
+  |                         | ----------------------> |                      |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Retrieve Profiles    |                     |
+  |                         |                        | -----------------------------------------> |
+  |                         |                        |                      |                     |
+  |                         |                        |                      | Return Profiles     |
+  |                         |                        | <----------------------------------------- |
+  |                         |                        |                      |                     |
+  |                         | Display Profile List   |                      |                     |
+  |                         | (Morning, Exercise,    |                      |                     |
+  |                         |  Night profiles)       |                      |                     |
+  | <---------------------- |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Select Exercise Profile|                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Show Profile Details   |                      |                     |
+  | <---------------------- |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Click Activate Profile |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Set Active Profile     |                      |                     |
+  |                         | ----------------------> |                      |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Apply Profile        |                     |
+  |                         |                        | ----------------------> |                     |
+  |                         |                        |                      |                     |
+  |                         |                        | Update Active Profile|                     |
+  |                         |                        | -----------------------------------------> |
+  |                         |                        |                      |                     |
+  |                         |                        | Confirm Applied      |                     |
+  |                         | <---------------------- |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Show Success           |                      |                     |
+  | <---------------------- |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |  Return to Home         |                        |                      |                     |
+  | ----------------------> |                        |                      |                     |
+  |                         |                        |                      |                     |
+  |                         | Switch to Home Screen  |                      |                     |
+  |                         | ----------------------> |                      |                     |
+  |                         |                        |                      |                     |
+```
+
+## 5. Control-IQ Technology Scenario
 
 ```
 CGM                     ControlIQ               HomeScreen              InsulinPump
@@ -216,7 +306,7 @@ CGM                     ControlIQ               HomeScreen              InsulinP
   |                         |                        |                      |
 ```
 
-## 5. Low Glucose Suspension Scenario
+## 6. Low Glucose Suspension Scenario
 
 ```
 CGM                     ControlIQ               HomeScreen              InsulinPump
@@ -265,7 +355,7 @@ CGM                     ControlIQ               HomeScreen              InsulinP
   |                         |                        |                      |
 ```
 
-## 6. Extended Bolus Scenario
+## 7. Extended Bolus Scenario
 
 ```
 User                    BolusScreen              HomeScreen              InsulinPump
