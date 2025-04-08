@@ -4,7 +4,7 @@ By Team 78:
 Edmund Ye,
 Eric Gershtein,
 Moheez Sarwar,
-Taran Johal,
+Taran Johal
 
 **We have broken down the responsibilities of the team as such**
 Use cases: Moheez
