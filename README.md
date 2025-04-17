@@ -31,7 +31,11 @@ Taran Johal
 The submission will contain:
 
 The project folder
+
 Use case document
+
 UML sequence diagrams
+
 UML Class diagram
+
 UML state machine diagram
