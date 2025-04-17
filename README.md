@@ -1,6 +1,6 @@
 # Insulim-Pump-Chump
 
-By Team 78:
+**By Team 78:**
 Edmund Ye,
 Eric Gershtein,
 Moheez Sarwar,
@@ -8,26 +8,28 @@ Taran Johal
 
 **We have broken down the responsibilities of the team as such**
 
-Use cases: Moheez
+**Use cases:** Moheez
 
-UML Sequence Diagram: Eric
+**UML Sequence Diagram:** Eric
 
-UML Class Diagram: Taran
+**UML Class Diagram:** Taran
 
-UML State Machine Diagram: Edmund
+**UML State Machine Diagram:** Edmund
 
-Textual explanation: Moheez
+**Textual explanation:** Moheez
 
-Backend implementation: Moheez and Taran
+**Backend implementation:** Moheez and Taran
 
-Frontend implementation: Eric and Edmund
+**Frontend implementation:** Eric and Edmund
 
-Tracebility matrix: Edmund
+**Tracebility matrix:** Edmund
 
-Demo Video: Edmund
+**Demo Video:** Edmund
 
 **Organization of the submission**
+
 The submission will contain:
+
 The project folder
 Use case document
 UML sequence diagrams
