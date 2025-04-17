@@ -7,10 +7,15 @@ Moheez Sarwar,
 Taran Johal
 
 **We have broken down the responsibilities of the team as such**
+
 Use cases: Moheez
+
 UML Sequence Diagram: Eric
+
 UML Class Diagram: Taran
+
 UML State Machine Diagram: Edmund
+
 Textual explanation: Moheez
 
 Backend implementation: Moheez and Taran
