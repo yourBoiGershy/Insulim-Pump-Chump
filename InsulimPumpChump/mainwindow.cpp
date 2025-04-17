@@ -6,6 +6,8 @@
 #include "options.h"
 #include "profilepage.h"
 #include "profileeditor.h"
+#include <QInputDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -79,10 +81,19 @@ void MainWindow::switchToHome(){
 }
 
 void MainWindow::switchToProfiles(){
-    // Set the current widget to the profile page
-    ui->stackedWidget->setCurrentWidget(profilePage);
+    // check pin
+    bool ok;
+    QString pin = QInputDialog::getText(this, "Please enter your PIN", "Hint: its 1234", QLineEdit::Password, "", &ok);
 
-    // The showEvent in profilePage will automatically refresh the profiles list
+
+    if(ok){
+        if(pin == "1234"){
+            // Set the current widget to the profile page
+            ui->stackedWidget->setCurrentWidget(profilePage);
+        } else{
+            QMessageBox::warning(this, "Access denied", "Incorrect PIN.");
+        }
+    }
 }
 
 void MainWindow::switchToProfileEditor(){
