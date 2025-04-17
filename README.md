@@ -14,9 +14,12 @@ UML State Machine Diagram: Edmund
 Textual explanation: Moheez
 
 Backend implementation: Moheez and Taran
+
 Frontend implementation: Eric and Edmund
 
 Tracebility matrix: Edmund
+
+Demo Video: Edmund
 
 **Organization of the submission**
 The submission will contain:
